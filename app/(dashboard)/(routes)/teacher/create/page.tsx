@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useTransition } from "react";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
@@ -22,6 +22,7 @@ import { toast } from "@/components/ui/use-toast";
 type Props = {};
 
 const CreationPage = (props: Props) => {
+  const [isPending, startTransition]=useTransition()
   const router = useRouter();
   const form = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
@@ -34,7 +35,10 @@ const CreationPage = (props: Props) => {
   const onSubmit = async (values: FormSchemaType) => {
     try {
       const response = await axios.post("/api/courses", values);
-      router.push(`/teacher/courses/${response.data.id}`);
+      startTransition(()=>{
+
+        router.push(`/teacher/courses/${response.data.id}`);
+      })
       toast({
         variant: "default",
         description: "Course created",
@@ -47,7 +51,8 @@ const CreationPage = (props: Props) => {
       });
     }
   };
-
+  // add loading
+if(isPending)return <p>looooooooding</p>
   return (
     <div className="max-w-5xl mx-auto flex md:items-center md:justify-center h-full p-6">
       <div>
