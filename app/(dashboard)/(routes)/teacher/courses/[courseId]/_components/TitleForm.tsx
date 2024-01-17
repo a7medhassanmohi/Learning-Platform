@@ -1,6 +1,6 @@
 "use client";
 import { Course } from "@prisma/client";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import * as z from "zod";
 import axios from "axios";
 import {
@@ -32,6 +32,7 @@ const formSchema = z.object({
 
 const TitleForm = ({ courseId, initialData }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
+  const[loading,startTransition]=useTransition()
   const toggleEdit = () => setIsEditing((current) => !current);
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -47,7 +48,8 @@ const TitleForm = ({ courseId, initialData }: Props) => {
         title: "Course updated",
       });
       toggleEdit()
-      router.refresh();
+          router.refresh();
+      
     } catch {
       toast({
         variant: "destructive",
@@ -56,6 +58,7 @@ const TitleForm = ({ courseId, initialData }: Props) => {
       });
     }
   };
+  if(loading)return <p>loading</p>
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
