@@ -1,15 +1,17 @@
 import React from 'react'
 import WelcomeBanner from './_components/WelcomeBanner'
+import CourseList from './_components/CourseList'
 
 type Props = {}
 
 const Courses = (props: Props) => {
   return (
-    <div className='grid grid-cols-1 md:grid-cols-3 p-5'>
+    <div className='grid grid-cols-1 lg:grid-cols-4 p-5'>
       
       {/* left container */}
-      <div className='md:col-span-2'>
+      <div className='lg:col-span-3 space-y-5'>
       <WelcomeBanner/>
+      <CourseList/>
       </div>
 
       {/* right container */}
