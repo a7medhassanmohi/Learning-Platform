@@ -61,10 +61,12 @@ const CourseList = (props: Props) => {
       </div>
       {/* display Course List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 ">
-        {courseList.map((item, index) => (
+        {courseList.length?courseList.map((item, index) => (
           <div key={item.id} className="">
             <CourseItem course={item} />
           </div>
+        )):(Array.from({length:7}).map((item,i)=>
+       (<LoadingCourseList key={i}/>)
         ))}
       </div>
     </div>
@@ -72,3 +74,16 @@ const CourseList = (props: Props) => {
 };
 
 export default CourseList;
+
+
+
+function LoadingCourseList(){
+    return(
+        <div  className="w-full rounded-xl  bg-slate-200 animate-pulse ">
+            <div className="aspect-video animate-pulse bg-slate-300 "></div>
+            <div className="h-5 m-2 rounded-xl w-[90%] animate-pulse bg-slate-300 "></div>
+            <div className="h-5 m-2 rounded-xl w-[80%] animate-pulse bg-slate-300 "></div>
+            <div className="h-5 m-2 rounded-xl w-[60%] animate-pulse bg-slate-300 "></div>
+       </div>
+    )
+}
