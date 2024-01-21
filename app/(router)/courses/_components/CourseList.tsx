@@ -35,7 +35,6 @@ const CourseList = (props: Props) => {
   const [courseList, setCourseList] = useState<CourseItemType[]>([]);
   const getAllCourses = () => {
     getCourseList().then((res: any) => {
-      console.log(res);
       setCourseList(res?.courseLists);
     });
   };

@@ -36,3 +36,22 @@ query MyQuery {
 const result =await request(MasterUrl,query)
 return result
 }
+
+export const getBanners=async()=>{
+const query=gql`
+query GetSideBanners {
+  sideBanners {
+    id
+    name
+    url
+    banner {
+      id
+      url
+    }
+  }
+}
+
+`
+const result =await request(MasterUrl,query)
+return result
+}
