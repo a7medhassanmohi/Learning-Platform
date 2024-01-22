@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import CourseVideoDescription from '../_components/CourseVideoDescription'
 import { getCourseById } from '@/utils/GlobalApi'
 import CourseEnrollSection from '../CourseEnrollSection'
+import CourseContentSection from '../_components/CourseContentSection'
 
 type Props = {
   params:{
@@ -58,6 +59,7 @@ const [courseInfo,setCourseInfo]=useState<CourseInfo>()
       {/* course content */}
       <div className=''>
       <CourseEnrollSection/>
+      <CourseContentSection courseInfo={courseInfo}/>
       </div>
 
     </div>
