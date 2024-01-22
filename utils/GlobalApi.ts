@@ -55,3 +55,38 @@ query GetSideBanners {
 const result =await request(MasterUrl,query)
 return result
 }
+
+export async function getCourseById(id:string){
+if(!id)return new Error("id of course is require")
+const query=gql`
+query GetSideBanners {
+  courseList(where: {id:"${id}"}) {
+    author
+      id
+      name
+      free
+      description
+      demoUrl
+      chapter {
+        ... on Chapter {
+          id
+          name
+          video {
+            url
+          }
+          shortDesc
+        }
+      }
+      banner {
+        url
+      }
+      sourceCode
+      totalChapters
+      tag
+  }
+}
+
+`
+const result =await request(MasterUrl,query)
+return result
+}

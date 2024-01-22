@@ -18,7 +18,6 @@ const SideBanners = (props: Props) => {
     const getSideBanner=()=>{
         getBanners().then((res:any)=>{
             setBanner(res?.sideBanners )
-            console.log(res);
             
         })
     }

@@ -9,6 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import CourseItem from "./CourseItem";
+import Link from "next/link";
 type Props = {};
 export type CourseItemType = {
   author: string;
@@ -61,9 +62,12 @@ const CourseList = (props: Props) => {
       {/* display Course List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 ">
         {courseList.length?courseList.map((item, index) => (
+          <Link key={item.id} href={`coursepreview/${item.id}`}>
           <div key={item.id} className="">
             <CourseItem course={item} />
           </div>
+          
+          </Link>
         )):(Array.from({length:7}).map((item,i)=>
        (<LoadingCourseList key={i}/>)
         ))}
