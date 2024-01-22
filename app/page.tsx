@@ -1,8 +1,11 @@
 import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-
+import { UserButton } from "@clerk/nextjs";
+import { redirect } from 'next/navigation'
 export default function Home() {
+  redirect('/courses')
   return (
-   <Button>dfdfdf</Button>
+    <div className="h-screen flex justify-center items-center">
+      <UserButton afterSignOutUrl="/sign-in"/>
+    </div>
   )
 }
