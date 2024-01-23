@@ -119,3 +119,21 @@ const result =await request(MasterUrl,query)
 return result
 
 }
+
+export async function checkUserEnrolledCourses(courseId:string,userEmail:string){
+  if(!courseId)return new Error("id of course is require")
+  if(!userEmail)return new Error("userEmail is require")
+const query=gql`
+query MyQuery {
+  userEnrollCourses(where: {courseId: "`+courseId+`", userEmail: "`+userEmail+`"}) {
+    courseId
+    userEmail
+    id
+  }
+}
+
+`
+
+const result =await request(MasterUrl,query)
+return result
+}

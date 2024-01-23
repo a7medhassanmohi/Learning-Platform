@@ -7,10 +7,11 @@ import { enrollCourses } from "@/utils/GlobalApi";
 import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 type Props = {
-  courseInfo:CourseInfo | undefined
+  courseInfo:CourseInfo | undefined,
+  isCourseEnrolledByUser:string | undefined
 };
 
-const CourseEnrollSection =  ({courseInfo}: Props) => {
+const CourseEnrollSection =  ({courseInfo,isCourseEnrolledByUser}: Props) => {
   const hasMemberShip=false
   const courseIsFree=courseInfo?.free
   const { user,isLoaded, } = useUser();
@@ -36,11 +37,12 @@ const CourseEnrollSection =  ({courseInfo}: Props) => {
       })
     }
   }
+  
   return (
     <div className="p-3 py-5 text-center rounded-sm bg-primary flex flex-col gap-3">
       <h2 className="text-2xl font-bold text-white"> Enroll to the Course</h2>
 
-      {user && (hasMemberShip || courseIsFree) ? (
+      {user && (hasMemberShip || courseIsFree) && !isCourseEnrolledByUser ? (
         /* if user has membership or login */
         <div className="flex flex-col gap-3">
           <h2 className="text-white font-light">
@@ -56,7 +58,7 @@ const CourseEnrollSection =  ({courseInfo}: Props) => {
           </Button>
         </div>
       ) 
-      :!user && courseIsFree ?( <div className="flex flex-col gap-3">
+      :!user && courseIsFree && !isCourseEnrolledByUser ?( <div className="flex flex-col gap-3">
       <h2 className="text-white font-light">
         {" "}
         Enroll Now to Start Learning and Building Project
@@ -71,7 +73,7 @@ const CourseEnrollSection =  ({courseInfo}: Props) => {
       </Link>
     </div>)
 
-      : (
+      : !isCourseEnrolledByUser && (
         /* if user doesn't have membership or login */
         <div className="flex flex-col gap-3">
           <h2 className="text-white font-light">
@@ -86,6 +88,28 @@ const CourseEnrollSection =  ({courseInfo}: Props) => {
           </Button>
         </div>
       )}
+
+      {/* continue Button */}
+    {isCourseEnrolledByUser &&  
+    <div className="flex flex-col gap-3">
+          <h2 className="text-white font-light">
+            Continue to Learn Your Project
+          
+          </h2>
+
+          <Link href={`/watchCourse/${isCourseEnrolledByUser}`}>
+            <Button
+              variant={"outline"}
+              className="bg-white text-primary hover:text-primary w-full "
+            >
+              Continue
+            </Button>
+          </Link>
+        </div>
+        }
+
+
+
     </div>
   );
 };
