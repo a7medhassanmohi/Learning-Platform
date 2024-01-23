@@ -3,10 +3,10 @@ import { CourseInfo } from '../[courseId]/page'
 import { redirect } from 'next/navigation'
 import VideoPlayer from './VideoPlayer'
 import Markdown from 'react-markdown'
+import { EnrolledCoursesDetailsType } from '../../watchCourse/[enrollId]/page'
 type Props = {
     courseInfo:CourseInfo |undefined
 }
-
 const CourseVideoDescription = ({courseInfo}: Props) => {
 if(!courseInfo) return redirect("/courses")
   return (

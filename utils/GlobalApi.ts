@@ -137,3 +137,53 @@ query MyQuery {
 const result =await request(MasterUrl,query)
 return result
 }
+
+export async function getUserEnrolledCourseDetails(enrollId:string,userEmail:string |undefined){
+  if(!enrollId)return new Error("id of course is require")
+  if(!userEmail)return new Error("userEmail is require")
+  const query=gql`
+  query MyQuery {
+    userEnrollCourses(where: {id: "`+enrollId+`", userEmail: "`+userEmail+`"}
+    first: 100
+    ) {
+      completedChapter {
+        ... on CompletedChapter {
+          id
+          chapterId
+          stage
+        }
+      }
+      courseId
+      id
+      userEmail
+      courseList {
+        author
+        banner {
+          url
+        }
+        chapter {
+          ... on Chapter {
+            id
+            name
+            shortDesc
+            video {
+              url
+            }
+          }
+        }
+        demoUrl
+        description
+        free
+        name
+        sourceCode
+        totalChapters
+        tag
+      }
+    }
+  }
+  
+  `
+  const result =await request(MasterUrl,query)
+  
+return JSON.parse(JSON.stringify(result))
+}
