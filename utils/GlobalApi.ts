@@ -92,3 +92,30 @@ query GetSideBanners {
 const result =await request(MasterUrl,query)
 return result
 }
+
+
+export async function enrollCourses(courseId:string,userEmail:string,){
+  if(!courseId)return new Error("id of course is require")
+  if(!userEmail)return new Error("userEmail is require")
+const query=gql`
+mutation MyMutation {
+  createUserEnrollCourse(
+    data: {courseId: "${courseId}", userEmail: "${userEmail}", courseList: {connect: {id: "`+courseId+`"}}}
+  ) {
+    id
+    courseId
+  }
+  publishManyUserEnrollCoursesConnection {
+    edges {
+      node {
+        id
+      }
+    }
+  }
+}
+
+`
+const result =await request(MasterUrl,query)
+return result
+
+}

@@ -29,6 +29,7 @@ export type CourseInfo={
   name:string,
   sourceCode:string,
   totalChapters:number,
+  free:boolean,
   tag:string[]
 }
 
@@ -58,7 +59,7 @@ const [courseInfo,setCourseInfo]=useState<CourseInfo>()
 
       {/* course content */}
       <div className=''>
-      <CourseEnrollSection/>
+      <CourseEnrollSection courseInfo={courseInfo}/>
       <CourseContentSection courseInfo={courseInfo}/>
       </div>
 
