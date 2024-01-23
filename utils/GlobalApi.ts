@@ -1,8 +1,10 @@
+"use server"
 import { request, gql } from 'graphql-request'
 
-const MasterUrl=`https://api-eu-west-2.hygraph.com/v2/clrnca0780wot01wde3mvi36y/master`
+const MasterUrl=`https://api-eu-west-2.hygraph.com/v2/${process.env.HYGRAPH_API_KEY}/master`
 
 export const getCourseList=async()=>{
+  
 const query=gql`
 query MyQuery {
     courseLists(first: 20, orderBy: createdAt_DESC) {

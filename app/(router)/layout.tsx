@@ -1,3 +1,4 @@
+import { UserButton } from "@clerk/nextjs";
 import Header from "./_components/Header";
 import SideNav from "./_components/SideNav";
 
