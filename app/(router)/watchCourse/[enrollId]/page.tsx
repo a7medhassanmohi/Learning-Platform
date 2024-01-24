@@ -1,15 +1,20 @@
 "use client";
-import { getUserEnrolledCourseDetails } from "@/utils/GlobalApi";
+import { getUserEnrolledCourseDetails, markChapterCompletedEndPoint } from "@/app/_utils/GlobalApi";
 import { useUser } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
 import WatchCourseVideoDescription from "../_components/WatchCourseVideoDescription";
 import WatchCourseContentSection from "../_components/WatchCourseContentSection";
+import { toast } from "@/components/ui/use-toast";
 
 type Props = {
   params: { enrollId: string };
 };
 export type EnrolledCoursesDetailsType = {
-  completedChapter: [];
+  completedChapter: {
+    chapterId:string,
+    id:string,
+    stage:string
+  }[];
   courseId: string;
   id: string;
   userEmail: string;
@@ -38,6 +43,7 @@ export type EnrolledCoursesDetailsType = {
 
 const WatchCourse = ({ params: { enrollId } }: Props) => {
   const { user } = useUser();
+  const [ChapterCompleted, setChapterCompleted] = useState<EnrolledCoursesDetailsType["completedChapter"]>([])
   const [userEnrollCourse, setUserEnrollCourse] = useState<EnrolledCoursesDetailsType>();
   const [ActiveIndexChapter, setActiveIndexChapter] = useState<number>(0)
 
@@ -46,10 +52,30 @@ const WatchCourse = ({ params: { enrollId } }: Props) => {
       enrollId,
       user?.primaryEmailAddress?.emailAddress
     ).then((res: any) => {
-      console.log(res?.userEnrollCourses[0]);
-      setUserEnrollCourse(res?.userEnrollCourses[0])
+      if(res?.userEnrollCourses){
+
+        console.log(res);
+        setChapterCompleted(res?.userEnrollCourses[0]?.completedChapter)
+        setUserEnrollCourse(res?.userEnrollCourses[0])
+      }
     });
   };
+/* save completed chapter id */
+const onChapterCompleted=(chapterId:string | undefined)=>{
+  markChapterCompletedEndPoint(enrollId,chapterId).then((res:any)=>{
+    console.log(res);
+    toast({
+      title: "Chapter Marked as Completed",
+    })
+    const newChapter={chapterId:chapterId as string,id:enrollId,stage:"ssss"} 
+    setChapterCompleted((prev)=>[...prev,newChapter])
+  }).catch((error)=>{
+
+  }).finally(()=>{
+
+  })
+}
+
   useEffect(() => {
     getUserEnrolledCourse();
   }, [enrollId, user]);
@@ -59,6 +85,8 @@ const WatchCourse = ({ params: { enrollId } }: Props) => {
   <div className='col-span-2 p-3 bg-white rounded-xl '>
       <WatchCourseVideoDescription EnrolledCoursesDetails={userEnrollCourse}
       ActiveIndexChapter={ActiveIndexChapter}
+      setChapterCompleted={onChapterCompleted}
+      ChapterCompleted={ChapterCompleted}
       /> 
   </div>
 
@@ -67,6 +95,7 @@ const WatchCourse = ({ params: { enrollId } }: Props) => {
   <WatchCourseContentSection EnrolledCoursesDetails={userEnrollCourse} isCourseEnrolledByUser={true}
   ActiveIndexChapter={ActiveIndexChapter}
   setActiveIndexChapter={setActiveIndexChapter}
+  ChapterCompleted={ChapterCompleted}
   />
   </div>
 

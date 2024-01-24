@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState, useTransition } from 'react'
 import CourseVideoDescription from '../_components/CourseVideoDescription'
-import { checkUserEnrolledCourses, getCourseById } from '@/utils/GlobalApi'
+import { checkUserEnrolledCourses, getCourseById } from '@/app/_utils/GlobalApi'
 import CourseEnrollSection from '../CourseEnrollSection'
 import CourseContentSection from '../_components/CourseContentSection'
 import { useUser } from '@clerk/nextjs'

@@ -1,5 +1,5 @@
 "use client"
-import { getBanners } from '@/utils/GlobalApi'
+import { getBanners } from '@/app/_utils/GlobalApi'
 import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 

@@ -3,7 +3,7 @@ import React from "react";
 import { useUser } from '@clerk/nextjs';
 import { CourseInfo } from "./[courseId]/page";
 import Link from "next/link";
-import { enrollCourses } from "@/utils/GlobalApi";
+import { enrollCourses } from "@/app/_utils/GlobalApi";
 import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 type Props = {

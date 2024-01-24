@@ -1,3 +1,4 @@
+
 "use server"
 import { request, gql } from 'graphql-request'
 
@@ -185,5 +186,27 @@ export async function getUserEnrolledCourseDetails(enrollId:string,userEmail:str
   `
   const result =await request(MasterUrl,query)
   
-return JSON.parse(JSON.stringify(result))
+return result
+}
+export async function markChapterCompletedEndPoint(enrollId:string,chapterId:string | undefined){
+  if(!enrollId)return new Error("id of course is require")
+  if(!chapterId)return new Error("chapterId is require")
+  const query=gql`
+  mutation MyMutation {
+    updateUserEnrollCourse(
+      data: {completedChapter: {create: {CompletedChapter: {data: {chapterId: "`+chapterId+`"}}}}}
+      where: {id: "`+enrollId+`"}
+    ){
+      id
+    }
+    publishUserEnrollCourse(where: {id: "`+enrollId+`"}) {
+      id
+    }
+  }
+  
+  `
+
+  const result =await request(MasterUrl,query)
+  
+return result
 }

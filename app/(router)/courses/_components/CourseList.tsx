@@ -1,5 +1,5 @@
 "use client";
-import { getCourseList } from "@/utils/GlobalApi";
+import { getCourseList } from "@/app/_utils/GlobalApi";
 import React, { useEffect, useState } from "react";
 import {
   Select,
