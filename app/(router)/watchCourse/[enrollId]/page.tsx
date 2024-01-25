@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import WatchCourseVideoDescription from "../_components/WatchCourseVideoDescription";
 import WatchCourseContentSection from "../_components/WatchCourseContentSection";
 import { toast } from "@/components/ui/use-toast";
-import { LoadingCoursePreview } from "../../coursepreview/[courseId]/page";
+import LoadingCoursePreview from "../../coursepreview/_components/LoadingCoursePreview";
 
 type Props = {
   params: { enrollId: string };
