@@ -19,6 +19,7 @@ export type EnrolledCoursesDetailsType = {
   id: string;
   userEmail: string;
   courseList: {
+    id:string,
     author: string;
     banner: {
       url: string;

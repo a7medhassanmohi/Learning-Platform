@@ -80,7 +80,7 @@ export default CourseList;
 
 
 
-function LoadingCourseList(){
+export function LoadingCourseList(){
     return(
         <div  className="w-full rounded-xl  bg-slate-200 animate-pulse ">
             <div className="aspect-video animate-pulse bg-slate-300 "></div>

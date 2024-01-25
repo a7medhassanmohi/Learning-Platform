@@ -210,3 +210,52 @@ export async function markChapterCompletedEndPoint(enrollId:string,chapterId:str
   
 return result
 }
+
+export async function getUserCoursesForDashBoard(userEmail:string){
+  const query=gql`
+  query MyQuery {
+    userEnrollCourses(where: { userEmail: "`+userEmail+`"}
+    first: 100
+    ) {
+      completedChapter {
+        ... on CompletedChapter {
+          id
+          chapterId
+          stage
+        }
+      }
+      courseId
+      id
+      userEmail
+      courseList {
+        author
+        banner {
+          url
+        }
+        chapter {
+          ... on Chapter {
+            id
+            name
+            shortDesc
+            video {
+              url
+            }
+          }
+        }
+        demoUrl
+        description
+        free
+        name
+        sourceCode
+        totalChapters
+        tag
+        id
+      }
+    }
+  }
+  
+  `
+  const result =await request(MasterUrl,query)
+  
+  return result
+}
