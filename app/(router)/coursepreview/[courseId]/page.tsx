@@ -90,7 +90,7 @@ if(courseInfo && user){
 
 export default CoursePreview
 
- function LoadingCoursePreview(){
+ export function LoadingCoursePreview(){
   return(
       <div  className="grid grid-cols-1 md:grid-cols-3 p-5 gap-3">
          <div className='col-span-2 p-3  rounded-xl  '>

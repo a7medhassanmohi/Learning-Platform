@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import WatchCourseVideoDescription from "../_components/WatchCourseVideoDescription";
 import WatchCourseContentSection from "../_components/WatchCourseContentSection";
 import { toast } from "@/components/ui/use-toast";
+import { LoadingCoursePreview } from "../../coursepreview/[courseId]/page";
 
 type Props = {
   params: { enrollId: string };
@@ -99,7 +100,7 @@ const onChapterCompleted=(chapterId:string | undefined)=>{
   />
   </div>
 
-</div>):null;
+</div>):<LoadingCoursePreview/>;
 };
 
 export default WatchCourse;
