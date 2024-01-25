@@ -55,7 +55,6 @@ const WatchCourse = ({ params: { enrollId } }: Props) => {
     ).then((res: any) => {
       if(res?.userEnrollCourses){
 
-        console.log(res);
         setChapterCompleted(res?.userEnrollCourses[0]?.completedChapter)
         setUserEnrollCourse(res?.userEnrollCourses[0])
       }

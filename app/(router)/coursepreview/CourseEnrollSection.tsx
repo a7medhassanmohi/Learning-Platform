@@ -19,8 +19,6 @@ const CourseEnrollSection =  ({courseInfo,isCourseEnrolledByUser}: Props) => {
   function onEnrollCourse(){
     if(user?.primaryEmailAddress && courseInfo){
       enrollCourses(courseInfo?.id,user?.primaryEmailAddress?.emailAddress).then((res:any)=>{
-        console.log(res);
-        
         if(res?.createUserEnrollCourse?.id){          
           toast({
             title: "User Enrolled Successful",
@@ -42,7 +40,7 @@ const CourseEnrollSection =  ({courseInfo,isCourseEnrolledByUser}: Props) => {
     <div className="p-3 py-5 text-center rounded-sm bg-primary flex flex-col gap-3">
       <h2 className="text-2xl font-bold text-white"> Enroll to the Course</h2>
 
-      {user && (hasMemberShip || courseIsFree) && !isCourseEnrolledByUser ? (
+      {user  && !isCourseEnrolledByUser && (
         /* if user has membership or login */
         <div className="flex flex-col gap-3">
           <h2 className="text-white font-light">
@@ -57,37 +55,7 @@ const CourseEnrollSection =  ({courseInfo,isCourseEnrolledByUser}: Props) => {
             Enroll Now
           </Button>
         </div>
-      ) 
-      :!user && courseIsFree && !isCourseEnrolledByUser ?( <div className="flex flex-col gap-3">
-      <h2 className="text-white font-light">
-        {" "}
-        Enroll Now to Start Learning and Building Project
-      </h2>
-      <Link href="/sign-in">
-        <Button
-          variant={"outline"}
-          className="bg-white text-primary hover:text-primary w-full "
-        >
-          Enroll Now
-        </Button>
-      </Link>
-    </div>)
-
-      : !isCourseEnrolledByUser && (
-        /* if user doesn't have membership or login */
-        <div className="flex flex-col gap-3">
-          <h2 className="text-white font-light">
-            {" "}
-            Buy Monthly MemberShip and get access to all courses
-          </h2>
-          <Button
-            variant={"outline"}
-            className="bg-white text-primary hover:text-primary "
-          >
-            Buy MemberShip just $ 5.00
-          </Button>
-        </div>
-      )}
+      ) }
 
       {/* continue Button */}
     {isCourseEnrolledByUser &&  
@@ -107,9 +75,6 @@ const CourseEnrollSection =  ({courseInfo,isCourseEnrolledByUser}: Props) => {
           </Link>
         </div>
         }
-
-
-
     </div>
   );
 };

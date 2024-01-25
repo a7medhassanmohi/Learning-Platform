@@ -33,21 +33,6 @@ const SideNav = (props: Props) => {
             path:"/courses",
             auth:true
         },
-        {
-            id:3,
-            name:"MemberShip",
-            icon:BadgeIcon,
-            path:"/membership",
-            auth:true
-        },
-        {
-            id:4,
-            name:"Be Instructor",
-            icon:GraduationCap,
-            path:"/instructor",
-            auth:true
-
-        }
     ]
   return (
     <div className=' bg-white shadow-sm border h-screen'>

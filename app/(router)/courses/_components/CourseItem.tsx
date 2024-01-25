@@ -17,21 +17,14 @@ const CourseItem = ({course}: Props) => {
         <div className='flex flex-col gap-1 p-2'>
             <h2 className='font-medium'>{course.name}</h2>
             <h2 className='text-[14px] text-gray-400'>{course.author}</h2>
-            {course.chapter.length? <div className='flex gap-2 items-center '>
-                <Image src="/youtube.png" alt='youtube icon' 
-                width={20}
-                height={20}
-                />
-                <h2 className='text-[16px] text-gray-400'>watch on youtube</h2>
-            </div>:
             <div className='flex gap-2 items-center '>
                 <Image src="/chapter.png" alt='chapter icon' 
                 width={20}
                 height={20}
                 />
-                <h2 className='text-[16px] text-gray-400'>chapters</h2>
-            </div>}
-            <h2 className='text-[15px] my-2 px-3 py-1 rounded-full  w-fit bg-black text-white ml-auto'>{course.free ? 'Free':'Paid'}</h2>
+                <h2 className='text-[16px] text-gray-400'>{course.totalChapters} chapters</h2>
+            </div>
+            <h2 className='text-[15px] my-2 px-3 py-1 rounded-full  w-fit bg-black text-white ml-auto'> Free</h2>
         </div>
     </div>
   )

@@ -48,16 +48,6 @@ const CourseList = (props: Props) => {
       {/*      title and Filter */}
       <div className="space-y-2 flex items-center justify-between">
         <h2 className="text-[20px] font-bold text-primary">All Courses</h2>
-        <Select>
-          <SelectTrigger className=" w-fit md:w-[180px]">
-            <SelectValue placeholder="Filter" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="All">All</SelectItem>
-            <SelectItem value="Paid">Paid</SelectItem>
-            <SelectItem value="Free">Free</SelectItem>
-          </SelectContent>
-        </Select>
       </div>
       {/* display Course List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 ">

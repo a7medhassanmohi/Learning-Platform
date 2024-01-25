@@ -16,7 +16,6 @@ const InProgressCourseList = ({ userEmail }: Props) => {
   const getAllUserCourses = () => {
     getUserCoursesForDashBoard(userEmail as string).then((res: any) => {
       if (res?.userEnrollCourses) {
-        console.log(res);
 
         setCourseUserList(res?.userEnrollCourses);
       }

@@ -1,9 +1,10 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { UserButton, auth, useAuth,currentUser } from "@clerk/nextjs";
-import { BellDot, Search } from "lucide-react";
+import { BellDot, Menu, Search } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import MobileSidebar from "./MobileSidebar";
 
 type Props = {};
 
@@ -12,6 +13,9 @@ const Header = (props: Props) => {
 
   return (
     <div className="p-4 bg-white flex justify-between items-center">
+      <div className="md:hidden">
+      <MobileSidebar/>
+      </div>
       <div className=" border flex gap-2 rounded-md p-2 ">
         <Search className="  cursor-pointer " />
         <input

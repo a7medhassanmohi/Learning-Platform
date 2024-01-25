@@ -40,7 +40,7 @@ const ProgressCourseItem = ({course}: Props) => {
               </div>
               }
               <h2 className='text-[12px] text-gray-400 mt-3 '>
-               {percentage}%
+               {percentage.toFixed(2)}%
                 <span className='float-right'>{course.completedChapter.length}/{course.courseList.totalChapters} chapters</span></h2>
               <Progress value={percentage} className='h-[7px]' />
           </div>
